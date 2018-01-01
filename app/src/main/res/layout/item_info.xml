@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:app="http://schemas.android.com/apk/res-auto"
               android:layout_width="match_parent"
-              android:layout_height="120dp"
+              android:layout_height="124dp"
               android:gravity="center_vertical"
               android:orientation="horizontal">
 
@@ -45,7 +45,7 @@
         </LinearLayout>
 
         <View
-            android:id="@+id/time_"
+            android:id="@+id/time_point"
             android:layout_width="6dp"
             android:layout_height="6dp"
             android:layout_centerVertical="true"
@@ -74,8 +74,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
-                android:lineSpacingExtra="1.1"
-                android:lineSpacingMultiplier="1.1dp"
+                android:lineSpacingExtra="1.1dp"
+                android:lineSpacingMultiplier="1.1"
                 android:maxLines="4"
                 android:minLines="4"
                 android:textColor="@color/colorRed"

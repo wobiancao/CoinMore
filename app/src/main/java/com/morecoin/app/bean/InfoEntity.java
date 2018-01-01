@@ -10,4 +10,5 @@ public class InfoEntity implements Serializable {
     public String mTime;
     public String mDetail;
     public String mDetailUrl;
+    public String mTextColor = "#666666";
 }
