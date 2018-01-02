@@ -16,8 +16,10 @@
         android:layout_height="48dp"
         custom:ddAnimatedIndicator="dachshund"
         custom:ddIndicatorHeight="6dp"
+        custom:tabTextColor="@color/colorAccent"
+        custom:tabSelectedTextColor="@color/colorWhite"
         android:background="@color/colorPrimary"
-        custom:ddIndicatorColor="@color/colorAccent"
+        custom:ddIndicatorColor="@color/colorWhite"
         custom:tabMode="scrollable"/>
 
     <android.support.v4.view.ViewPager

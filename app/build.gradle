@@ -53,4 +53,12 @@ dependencies {
     compile 'com.scwang.smartrefresh:SmartRefreshHeader:1.0.4-5'
     //适配器
     compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.30'
+
+    //Retrofit
+    compile 'com.squareup.retrofit2:retrofit:2.2.0'
+    compile 'com.squareup.retrofit2:adapter-rxjava2:2.2.0'
+    compile 'com.squareup.retrofit2:converter-scalars:2.2.0'
+
+    //JSOUP
+    compile 'org.jsoup:jsoup:1.10.2'
 }

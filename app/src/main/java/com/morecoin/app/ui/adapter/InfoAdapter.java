@@ -26,11 +26,11 @@ public class InfoAdapter extends BaseQuickAdapter<InfoEntity, BaseViewHolder> {
         helper.getView(R.id.line_up).setVisibility(helper.getLayoutPosition() == 0 ? View.INVISIBLE : View.VISIBLE);
         helper.setText(R.id.item_time, item.mTime)
                 .setText(R.id.item_detail, item.mDetail)
-                .setTextColor(R.id.line_up, Color.parseColor(item.mTextColor))
+                .setBackgroundColor(R.id.line_up, Color.parseColor(item.mTextColor))
                 .setTextColor(R.id.item_time, Color.parseColor(item.mTextColor))
                 .setTextColor(R.id.item_detail, Color.parseColor(item.mTextColor))
-                .setTextColor(R.id.line_down, Color.parseColor(item.mTextColor))
-                .setTextColor(R.id.time_point, Color.parseColor(item.mTextColor))
+                .setBackgroundColor(R.id.line_down, Color.parseColor(item.mTextColor))
+                .setBackgroundColor(R.id.time_point, Color.parseColor(item.mTextColor))
         ;
     }
 }
