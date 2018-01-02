@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              xmlns:ads="http://schemas.android.com/apk/res-auto"
+              android:orientation="vertical"
+              android:gravity="center"
+              android:id="@+id/container"
+              android:layout_height="match_parent">
+
+    <FrameLayout
+        android:layout_width="160dp"
+        android:animateLayoutChanges="true"
+        android:layout_height="160dp">
+
+        <ImageView
+            android:id="@+id/imageLogo"
+            android:layout_width="160dp"
+            android:layout_height="160dp"
+            android:src="@drawable/ic_logo"
+            android:visibility="gone"/>
+
+        <com.eftimoff.androipathview.PathView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/pathView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:pathColor="@color/colorPrimary"
+            app:pathWidth="2dp"
+            app:svg="@raw/logo"/>
+
+    </FrameLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="More Coin"
+        android:textColor="@color/colorPrimary"
+        android:textStyle="bold"
+        android:textSize="30sp"/>
+
+</LinearLayout>

@@ -1,10 +1,14 @@
 package com.morecoin.app.ui;
 
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AlertDialog;
 
 import com.kekstudio.dachshundtablayout.DachshundTabLayout;
 import com.kekstudio.dachshundtablayout.indicators.DachshundIndicator;
@@ -14,10 +18,15 @@ import com.morecoin.app.base.IPresenter;
 import com.morecoin.app.model.impl.BiCaijingModelImpl;
 import com.morecoin.app.model.impl.BiShiJieModelImpl;
 import com.morecoin.app.ui.fragment.InfoFragment;
+import com.morecoin.app.utils.VersionUtil;
+import com.pgyersdk.javabean.AppBean;
+import com.pgyersdk.update.PgyUpdateManager;
+import com.pgyersdk.update.UpdateManagerListener;
 
 import java.util.ArrayList;
 
 import butterknife.Bind;
+import butterknife.OnClick;
 
 public class MainActivity extends BaseActivity {
 
@@ -29,6 +38,7 @@ public class MainActivity extends BaseActivity {
     MyPagerAdapter mMyPagerAdapter;
     private ArrayList<Fragment> mFragments = new ArrayList<>();
     private final String[] names = new String[]{"币财经", "币世界"};
+
     @Override
     protected int getLayoutViewId() {
         return R.layout.activity_main;
@@ -48,6 +58,45 @@ public class MainActivity extends BaseActivity {
         mViewPager.setAdapter(mMyPagerAdapter);
         mTabLayout.setupWithViewPager(mViewPager);
         mTabLayout.setAnimatedIndicator(new DachshundIndicator(mTabLayout));
+        PgyUpdateManager.setIsForced(true);
+        PgyUpdateManager.register(this, getString(R.string.provider_file), new UpdateManagerListener() {
+            @Override
+            public void onNoUpdateAvailable() {
+
+            }
+
+            @Override
+            public void onUpdateAvailable(final String result) {
+                final AppBean appBean = getAppBeanFromString(result);
+                int code = Integer.valueOf(appBean.getVersionCode());
+                if (code > VersionUtil.getVersionCode(MainActivity.this)){
+                    new AlertDialog.Builder(MainActivity.this)
+                            .setTitle("新版本提示")
+                            .setMessage(appBean.getReleaseNote())
+                            .setNegativeButton(
+                                    "确定",
+                                    new DialogInterface.OnClickListener() {
+
+                                        @Override
+                                        public void onClick(
+                                                DialogInterface dialog,
+                                                int which) {
+                                            Uri uri = Uri.parse("https://www.pgyer.com/morecoin");
+                                            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                                            startActivity(intent);
+                                        }
+                                    }).show();
+                }
+            }
+
+        });
+    }
+
+
+    @OnClick(R.id.image_more)
+    public void onViewClicked() {
+        startActivityByAnim(new Intent(MainActivity.this, AboutActivity.class), android.R.anim.fade_in, android.R.anim.fade_out);
+
     }
 
     private class MyPagerAdapter extends FragmentPagerAdapter {

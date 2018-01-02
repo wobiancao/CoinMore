@@ -2,25 +2,39 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:custom="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
     android:fitsSystemWindows="true"
+    android:orientation="vertical"
     >
 
-    <com.kekstudio.dachshundtablayout.DachshundTabLayout
-        android:id="@+id/tab_layout"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_marginTop="0.3dp"
         android:layout_height="48dp"
-        custom:ddAnimatedIndicator="dachshund"
-        custom:ddIndicatorHeight="6dp"
-        custom:tabTextColor="@color/colorAccent"
-        custom:tabSelectedTextColor="@color/colorWhite"
-        android:background="@color/colorPrimary"
-        custom:ddIndicatorColor="@color/colorWhite"
-        custom:tabMode="scrollable"/>
+        android:background="@color/colorPrimary">
+
+        <com.kekstudio.dachshundtablayout.DachshundTabLayout
+            android:id="@+id/tab_layout"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="0.3dp"
+            android:background="@color/colorPrimary"
+            custom:ddAnimatedIndicator="dachshund"
+            custom:ddIndicatorColor="@color/colorWhite"
+            custom:ddIndicatorHeight="6dp"
+            custom:tabMode="scrollable"
+            custom:tabSelectedTextColor="@color/colorWhite"
+            custom:tabTextColor="@color/colorAccent"/>
+        <ImageView
+            android:id="@+id/image_more"
+            android:layout_width="wrap_content"
+            android:src="@drawable/ic_more"
+            android:layout_alignParentRight="true"
+            android:paddingRight="10dp"
+            android:paddingLeft="10dp"
+            android:layout_height="match_parent"/>
+    </RelativeLayout>
 
     <android.support.v4.view.ViewPager
         android:id="@+id/view_pager"

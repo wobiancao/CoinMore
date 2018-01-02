@@ -1,10 +1,12 @@
 package com.morecoin.app.base;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
+import com.umeng.analytics.MobclickAgent;
 
 import butterknife.ButterKnife;
 
@@ -72,5 +74,29 @@ public abstract class BaseActivity<T extends IPresenter> extends RxAppCompatActi
         detachView();
         AppActivityManager.getInstance().remove(this);
         ButterKnife.unbind(this);
+    }
+
+    ////////////////////////////////启动Activity转场动画/////////////////////////////////////////////
+
+    protected void startActivityForResultByAnim(Intent intent, int requestCode, int animIn, int animExit) {
+        startActivityForResult(intent, requestCode);
+        overridePendingTransition(animIn, animExit);
+    }
+
+    protected void startActivityByAnim(Intent intent, int animIn, int animExit) {
+        startActivity(intent);
+        overridePendingTransition(animIn, animExit);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
     }
 }

@@ -16,6 +16,10 @@ import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
+import java.util.Date;
+import java.util.Timer;
+import java.util.TimerTask;
+
 import butterknife.Bind;
 
 /**
@@ -34,6 +38,9 @@ public class InfoFragment extends BaseFragment<InfoContract.InfoPresenter> imple
     private InfoAdapter mInfoAdapter;
     private String mHost = "";
     private final static String TAG_HOST = "tagHost";
+    private Timer timer = new Timer(true);
+    private boolean isTimer = false;
+    private final long timeTask = 30 * 1000;
     @Override
     protected InfoContract.InfoPresenter initInjector() {
         return new InfoImpl();
@@ -71,6 +78,15 @@ public class InfoFragment extends BaseFragment<InfoContract.InfoPresenter> imple
         mRefresh.autoRefresh();
     }
 
+    TimerTask task = new TimerTask() {
+        public void run() {
+            //每次需要执行的代码放到这里面。
+            if (mPresenter != null){
+                mPresenter.onParseInfo(mHost);
+            }
+        }
+    };
+
     @Override
     public void onRefresh(RefreshLayout refreshlayout) {
         if (mPresenter != null){
@@ -88,12 +104,27 @@ public class InfoFragment extends BaseFragment<InfoContract.InfoPresenter> imple
     @Override
     public void onBindData(InfoBean infoBean) {
         if (infoBean != null){
+            if (!isTimer){//第一次进来之后 每隔10s请求一次
+                isTimer = true;
+                timer.schedule(task, new Date(), timeTask);
+            }
             String mDate = infoBean.mDate + "";
-            mTimeView.setText(mDate);
+            if (mTimeView != null){
+                mTimeView.setText(mDate);
+            }
             if (mInfoAdapter != null){
                 mInfoAdapter.setNewData(infoBean.mData);
             }
         }
 
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        if (timer != null){
+            task.cancel();
+            timer.cancel();
+        }
     }
 }
