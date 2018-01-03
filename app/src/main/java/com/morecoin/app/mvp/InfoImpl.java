@@ -7,6 +7,7 @@ import com.morecoin.app.base.IView;
 import com.morecoin.app.base.observer.SimpleObserver;
 import com.morecoin.app.bean.InfoBean;
 import com.morecoin.app.model.impl.BiCaijingModelImpl;
+import com.morecoin.app.model.impl.BiKnowModelImpl;
 import com.morecoin.app.model.impl.BiShiJieModelImpl;
 
 import io.reactivex.Observable;
@@ -37,6 +38,8 @@ public class InfoImpl extends BasePresenterImpl<InfoContract.InfoIView> implemen
             beanObservable = BiShiJieModelImpl.getInstance().getInfoList();
         } else if (mHost.equals(BiCaijingModelImpl.HOST)) {
             beanObservable =  BiCaijingModelImpl.getInstance().getInfoList();
+        }else if (mHost.equals(BiKnowModelImpl.HOST)){
+            beanObservable = BiKnowModelImpl.getInstance().getInfoList();
         }
         if (beanObservable != null){
             beanObservable.observeOn(AndroidSchedulers.mainThread())

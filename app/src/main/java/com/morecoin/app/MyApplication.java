@@ -3,7 +3,6 @@ package com.morecoin.app;
 import android.app.Application;
 
 import com.pgyersdk.crash.PgyCrashManager;
-import com.umeng.commonsdk.UMConfigure;
 
 
 public class MyApplication extends Application {
@@ -15,7 +14,7 @@ public class MyApplication extends Application {
         super.onCreate();
         instance = this;
         PgyCrashManager.register(this);
-        UMConfigure.init(this, UMConfigure.DEVICE_TYPE_PHONE, UMENG_KEY);
+
     }
 
     public static MyApplication getInstance() {

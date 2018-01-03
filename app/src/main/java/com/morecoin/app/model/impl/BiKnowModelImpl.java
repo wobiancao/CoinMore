@@ -24,11 +24,11 @@ import io.reactivex.functions.Function;
  * Created by wxy on 2018/1/2.
  */
 
-public class BiShiJieModelImpl extends BaseModelImpl implements InfoModel {
-    public static final String HOST = "http://m.bishijie.com/";
-    private static final String PAGE_URL = "home/newsflash/getnextpage?page=0";
-    public static BiShiJieModelImpl getInstance() {
-        return new BiShiJieModelImpl();
+public class BiKnowModelImpl extends BaseModelImpl implements InfoModel {
+    public static final String HOST = "http://www.biknow.com/";
+    private static final String PAGE_URL = "?";
+    public static BiKnowModelImpl getInstance() {
+        return new BiKnowModelImpl();
     }
 
     @Override
@@ -48,19 +48,18 @@ public class BiShiJieModelImpl extends BaseModelImpl implements InfoModel {
                 InfoBean infoBean = new InfoBean();
                 try {
                     Document doc = Jsoup.parse(content);
-                    Element listGroup = doc.getElementsByClass("daynews dateitem").get(0);
+                    Element listGroup = doc.getElementById("jiazai");
                     infoBean.mDate = DateUtils.getNowTimeStr();
-                    Elements listEs = listGroup.getElementsByTag("article");
+                    Elements listEs = listGroup.getElementsByTag("li");
                     if (null != listEs && listEs.size() > 1) {
                         List<InfoEntity> infoList = new ArrayList<InfoEntity>();
                         for (int i = 0; i < listEs.size(); i++) {
                             InfoEntity infoEntity = new InfoEntity();
                             Element item = listEs.get(i);
-                            String mTime = item.getElementsByTag("h3").get(0).text();
-                            String mDetail = item.getElementsByClass("text_show").get(0).text();
-                            Elements focus = item.getElementsByClass("focus");
-                            String mColor = focus != null && focus.size() > 0 ? "#ED6979" : "#666666";
-                            infoEntity.mDetail = mDetail;
+                            String mTime = item.getElementsByClass("indexkxtime").get(0).text();
+                            String mDetail = item.getElementsByClass("kuaixunconr").get(0).getElementsByTag("a").get(0).text();
+                            String mColor = "#666666";
+                            infoEntity.mDetail = mDetail.replace("[查看原文]", "");
                             infoEntity.mTextColor = mColor;
                             infoEntity.mTime = mTime;
                             infoList.add(infoEntity);

@@ -9,6 +9,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
+import android.view.ViewGroup;
 
 import com.kekstudio.dachshundtablayout.DachshundTabLayout;
 import com.kekstudio.dachshundtablayout.indicators.DachshundIndicator;
@@ -16,6 +17,7 @@ import com.morecoin.app.R;
 import com.morecoin.app.base.BaseActivity;
 import com.morecoin.app.base.IPresenter;
 import com.morecoin.app.model.impl.BiCaijingModelImpl;
+import com.morecoin.app.model.impl.BiKnowModelImpl;
 import com.morecoin.app.model.impl.BiShiJieModelImpl;
 import com.morecoin.app.ui.fragment.InfoFragment;
 import com.morecoin.app.utils.VersionUtil;
@@ -37,7 +39,7 @@ public class MainActivity extends BaseActivity {
     ViewPager mViewPager;
     MyPagerAdapter mMyPagerAdapter;
     private ArrayList<Fragment> mFragments = new ArrayList<>();
-    private final String[] names = new String[]{"币财经", "币世界"};
+    private final String[] names = new String[]{"币财经", "币世界", "币知道"};
 
     @Override
     protected int getLayoutViewId() {
@@ -54,6 +56,7 @@ public class MainActivity extends BaseActivity {
         super.initView(savedInstanceState);
         mFragments.add(InfoFragment.newInstance(BiCaijingModelImpl.HOST));
         mFragments.add(InfoFragment.newInstance(BiShiJieModelImpl.HOST));
+        mFragments.add(InfoFragment.newInstance(BiKnowModelImpl.HOST));
         mMyPagerAdapter = new MyPagerAdapter(getSupportFragmentManager());
         mViewPager.setAdapter(mMyPagerAdapter);
         mTabLayout.setupWithViewPager(mViewPager);
@@ -117,6 +120,11 @@ public class MainActivity extends BaseActivity {
         @Override
         public Fragment getItem(int position) {
             return mFragments.get(position);
+        }
+
+        @Override
+        public void destroyItem(ViewGroup container, int position, Object object) {
+//            super.destroyItem(container, position, object);
         }
     }
 

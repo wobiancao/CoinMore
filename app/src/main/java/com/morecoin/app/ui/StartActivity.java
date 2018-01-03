@@ -2,6 +2,7 @@ package com.morecoin.app.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -36,12 +37,12 @@ public class StartActivity extends BaseActivity {
         mLogoView.postDelayed(new Runnable() {
             @Override
             public void run() {
-                mPathView.setVisibility(View.INVISIBLE);
-                mLogoView.setVisibility(View.VISIBLE);
+//                mLogoView.setVisibility(View.VISIBLE);
+//                mPathView.setVisibility(View.GONE);
                 goNext();
-
             }
         }, 520);
+
     }
 
     @Override

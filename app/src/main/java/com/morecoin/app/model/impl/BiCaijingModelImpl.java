@@ -5,6 +5,7 @@ import com.morecoin.app.base.BaseModelImpl;
 import com.morecoin.app.bean.InfoBean;
 import com.morecoin.app.bean.InfoEntity;
 import com.morecoin.app.model.InfoModel;
+import com.morecoin.app.utils.DateUtils;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -25,7 +26,7 @@ import io.reactivex.functions.Function;
 
 public class BiCaijingModelImpl extends BaseModelImpl implements InfoModel {
     public static final String HOST = "http://www.jinse.com/";
-    private static final String PAGE_URL = "/lives";
+    private static final String PAGE_URL = "lives";
     public static BiCaijingModelImpl getInstance() {
         return new BiCaijingModelImpl();
     }
@@ -48,22 +49,25 @@ public class BiCaijingModelImpl extends BaseModelImpl implements InfoModel {
                 try {
                     Document doc = Jsoup.parse(content);
                     Element listGroup = doc.getElementsByClass("live news-flash").get(0);
-                    String mDate = listGroup.getElementsByClass("con-item clearfix lost-area").get(0).getElementsByTag("span").get(1).text();
-                    infoBean.mDate = mDate;
+                    infoBean.mDate = DateUtils.getNowTimeStr();
                     Elements listEs = listGroup.getElementsByClass("lost").get(0).getElementsByTag("li");
                     if (null != listEs && listEs.size() > 1) {
                         List<InfoEntity> infoList = new ArrayList<InfoEntity>();
                         for (int i = 0; i < listEs.size(); i++) {
                             InfoEntity infoEntity = new InfoEntity();
                             Element item = listEs.get(i);
-                            String mTime = item.getElementsByClass("live-time").get(0).text();
-                            String mDetail = item.getElementsByClass("live-info").get(0).text();
+                            Elements timeEl = item.getElementsByClass("live-time");
                             Elements focus = item.getElementsByClass("clearfix  red ");
                             String mColor = focus != null && focus.size() > 0 ? "#ED6979" : "#666666";
-                            infoEntity.mDetail = mDetail.replace("[查看原文]", "");
                             infoEntity.mTextColor = mColor;
-                            infoEntity.mTime = mTime;
-                            infoList.add(infoEntity);
+                            if (timeEl != null && timeEl.size() > 0){
+                                infoEntity.mTime = timeEl.get(0).text();
+                            }
+                            Elements detailEl = item.getElementsByClass("live-info");
+                            if (detailEl != null && detailEl.size() > 0){
+                                infoEntity.mDetail = detailEl.get(0).text().replace("[查看原文]", "");
+                                infoList.add(infoEntity);
+                            }
                         }
                         infoBean.mData = infoList;
                         e.onNext(infoBean);
