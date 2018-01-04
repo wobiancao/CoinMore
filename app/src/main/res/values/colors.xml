@@ -5,7 +5,9 @@
     <color name="colorAccent">#D3DAFA</color>
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorBlack">#666666</color>
+    <color name="colorBlack3">#333333</color>
     <color name="colorOrange">#FEA904</color>
     <color name="colorGary">#E9D7B5</color>
     <color name="colorRed">#ED6979</color>
+    <color name="colorGary9">#999999</color>
 </resources>

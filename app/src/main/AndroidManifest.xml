@@ -30,6 +30,7 @@
             android:launchMode="singleTop"/>
 
         <activity android:name=".ui.AboutActivity"/>
+        <activity android:name=".ui.WebActivity"/>
 
         <meta-data
             android:name="PGYER_APPID"

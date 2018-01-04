@@ -56,8 +56,8 @@ public class BiKnowModelImpl extends BaseModelImpl implements InfoModel {
                         for (int i = 0; i < listEs.size(); i++) {
                             InfoEntity infoEntity = new InfoEntity();
                             Element item = listEs.get(i);
-                            String mTime = item.getElementsByClass("indexkxtime").get(0).text();
-                            String mDetail = item.getElementsByClass("kuaixunconr").get(0).getElementsByTag("a").get(0).text();
+                            String mTime = item.getElementsByClass("indexkxtime").first().text();
+                            String mDetail = item.getElementsByClass("kuaixunconr").first().getElementsByTag("a").first().text();
                             String mColor = "#666666";
                             infoEntity.mDetail = mDetail.replace("[查看原文]", "");
                             infoEntity.mTextColor = mColor;

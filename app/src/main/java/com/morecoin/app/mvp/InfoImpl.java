@@ -19,7 +19,6 @@ import io.reactivex.schedulers.Schedulers;
  */
 
 public class InfoImpl extends BasePresenterImpl<InfoContract.InfoIView> implements InfoContract.InfoPresenter {
-
     @Override
     public void attachView(@NonNull IView iView) {
         super.attachView(iView);

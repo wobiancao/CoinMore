@@ -1,12 +1,20 @@
 package com.morecoin.app.utils;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 /**
  * Created by wxy on 2018/1/3.
  */
 
 public class DateUtils {
+    private final static String TIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
+    public static String getDateTimes(long timeMillis) {
+        SimpleDateFormat mDateFormat = new SimpleDateFormat(TIME_FORMAT);
+        return mDateFormat.format(new Date(timeMillis * 1000));
+    }
+
     public static String getNowTimeStr(){
         long time=System.currentTimeMillis();
         final Calendar mCalendar= Calendar.getInstance();

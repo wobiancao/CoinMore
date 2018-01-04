@@ -48,7 +48,7 @@ public class BiShiJieModelImpl extends BaseModelImpl implements InfoModel {
                 InfoBean infoBean = new InfoBean();
                 try {
                     Document doc = Jsoup.parse(content);
-                    Element listGroup = doc.getElementsByClass("daynews dateitem").get(0);
+                    Element listGroup = doc.getElementsByClass("daynews dateitem").first();
                     infoBean.mDate = DateUtils.getNowTimeStr();
                     Elements listEs = listGroup.getElementsByTag("article");
                     if (null != listEs && listEs.size() > 1) {
@@ -56,8 +56,8 @@ public class BiShiJieModelImpl extends BaseModelImpl implements InfoModel {
                         for (int i = 0; i < listEs.size(); i++) {
                             InfoEntity infoEntity = new InfoEntity();
                             Element item = listEs.get(i);
-                            String mTime = item.getElementsByTag("h3").get(0).text();
-                            String mDetail = item.getElementsByClass("text_show").get(0).text();
+                            String mTime = item.getElementsByTag("h3").first().text();
+                            String mDetail = item.getElementsByClass("text_show").first().text();
                             Elements focus = item.getElementsByClass("focus");
                             String mColor = focus != null && focus.size() > 0 ? "#ED6979" : "#666666";
                             infoEntity.mDetail = mDetail;

@@ -48,9 +48,9 @@ public class BiCaijingModelImpl extends BaseModelImpl implements InfoModel {
                 InfoBean infoBean = new InfoBean();
                 try {
                     Document doc = Jsoup.parse(content);
-                    Element listGroup = doc.getElementsByClass("live news-flash").get(0);
+                    Element listGroup = doc.getElementsByClass("live news-flash").first();
                     infoBean.mDate = DateUtils.getNowTimeStr();
-                    Elements listEs = listGroup.getElementsByClass("lost").get(0).getElementsByTag("li");
+                    Elements listEs = listGroup.getElementsByClass("lost").first().getElementsByTag("li");
                     if (null != listEs && listEs.size() > 1) {
                         List<InfoEntity> infoList = new ArrayList<InfoEntity>();
                         for (int i = 0; i < listEs.size(); i++) {
@@ -61,11 +61,11 @@ public class BiCaijingModelImpl extends BaseModelImpl implements InfoModel {
                             String mColor = focus != null && focus.size() > 0 ? "#ED6979" : "#666666";
                             infoEntity.mTextColor = mColor;
                             if (timeEl != null && timeEl.size() > 0){
-                                infoEntity.mTime = timeEl.get(0).text();
+                                infoEntity.mTime = timeEl.first().text();
                             }
                             Elements detailEl = item.getElementsByClass("live-info");
                             if (detailEl != null && detailEl.size() > 0){
-                                infoEntity.mDetail = detailEl.get(0).text().replace("[查看原文]", "");
+                                infoEntity.mDetail = detailEl.first().text().replace("[查看原文]", "");
                                 infoList.add(infoEntity);
                             }
                         }
