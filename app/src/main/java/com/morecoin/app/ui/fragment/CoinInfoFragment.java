@@ -11,7 +11,7 @@ import com.morecoin.app.base.BaseFragment;
 import com.morecoin.app.bean.InfoBean;
 import com.morecoin.app.mvp.InfoImpl;
 import com.morecoin.app.mvp.InfoContract;
-import com.morecoin.app.ui.adapter.InfoAdapter;
+import com.morecoin.app.ui.adapter.CoinInfoAdapter;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
@@ -27,7 +27,7 @@ import butterknife.Bind;
  * 讯息
  */
 
-public class InfoFragment extends BaseFragment<InfoContract.InfoPresenter> implements InfoContract.InfoIView, OnRefreshListener {
+public class CoinInfoFragment extends BaseFragment<InfoContract.InfoPresenter> implements InfoContract.InfoIView, OnRefreshListener {
 
     @Bind(R.id.info_list)
     RecyclerView mRecycler;
@@ -35,19 +35,19 @@ public class InfoFragment extends BaseFragment<InfoContract.InfoPresenter> imple
     SmartRefreshLayout mRefresh;
     @Bind(R.id.info_time)
     TextView mTimeView;
-    private InfoAdapter mInfoAdapter;
+    private CoinInfoAdapter mInfoAdapter;
     private String mHost = "";
     private final static String TAG_HOST = "tagHost";
     private Timer timer = new Timer(true);
     private boolean isTimer = false;
-    private final long timeTask = 30 * 1000;
+    private final long timeTask = 60 * 1000;
     @Override
     protected InfoContract.InfoPresenter initInjector() {
         return new InfoImpl();
     }
 
-    public static InfoFragment newInstance(String host) {
-        InfoFragment fragment = new InfoFragment();
+    public static CoinInfoFragment newInstance(String host) {
+        CoinInfoFragment fragment = new CoinInfoFragment();
         Bundle args = new Bundle();
         args.putString(TAG_HOST, host);
         fragment.setArguments(args);
@@ -70,7 +70,7 @@ public class InfoFragment extends BaseFragment<InfoContract.InfoPresenter> imple
     @Override
     public void initView(Bundle savedInstanceState) {
         super.initView(savedInstanceState);
-        mInfoAdapter = new InfoAdapter(null);
+        mInfoAdapter = new CoinInfoAdapter(null);
         mRefresh.setOnRefreshListener(this);
         mRecycler.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRecycler.setNestedScrollingEnabled(false);

@@ -2,32 +2,44 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:app="http://schemas.android.com/apk/res-auto"
               android:layout_width="match_parent"
-              android:layout_height="110dp"
+              android:layout_height="wrap_content"
               android:gravity="center_vertical"
               android:orientation="horizontal">
 
     <RelativeLayout
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_weight="0.2">
-
-        <TextView
-            android:id="@+id/item_time"
+        <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:paddingLeft="6dp"
-            android:text="12:29"
-            android:textColor="@color/colorRed"
-            android:textSize="14sp"/>
+            android:orientation="horizontal"
+            android:layout_centerVertical="true"
+            android:gravity="center_vertical"
+            android:layout_height="wrap_content">
+            <View
+                android:id="@+id/time_point"
+                android:layout_width="6dp"
+                android:layout_height="6dp"
+                android:background="@color/colorRed"/>
+            <TextView
+                android:id="@+id/item_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="6dp"
+                android:text="12:29"
+                android:textColor="@color/colorRed"
+                android:textSize="14sp"/>
+        </LinearLayout>
+
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="2dp"
             android:orientation="vertical"
+            android:visibility="visible"
             android:weightSum="2">
 
             <View
@@ -47,21 +59,16 @@
                 />
         </LinearLayout>
 
-        <View
-            android:id="@+id/time_point"
-            android:layout_width="6dp"
-            android:layout_height="6dp"
-            android:layout_centerVertical="true"
-            android:background="@color/colorRed"/>
+
 
     </RelativeLayout>
 
     <android.support.v7.widget.CardView
         android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="8dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
         android:layout_marginRight="10dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="4dp"
         android:layout_weight="1"
         app:cardCornerRadius="4dp"
         app:cardElevation="4dp"
@@ -78,7 +85,6 @@
             android:lineSpacingExtra="1.1dp"
             android:layout_gravity="center"
             android:lineSpacingMultiplier="1.1"
-            android:maxLines="4"
             android:minLines="4"
             android:text="就按汇顶科技哈就按汇顶科技哈技术定哈定哈定哈定哈定哈定哈定哈定哈定哈定哈定哈定哈定哈定哈肯定哈数据库大恒科技技术定哈定哈定哈定哈定哈定哈定哈定哈定哈定哈定哈定哈定哈定哈肯定哈数据库大恒科技"
             android:textColor="@color/colorRed"

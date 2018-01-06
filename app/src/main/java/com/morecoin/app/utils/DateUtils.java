@@ -1,5 +1,9 @@
 package com.morecoin.app.utils;
 
+import android.text.TextUtils;
+
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -23,6 +27,19 @@ public class DateUtils {
                 + "." + mCalendar.get(Calendar.DAY_OF_MONTH)+ " 今天 " +
                 "星期" + GetCH(mCalendar.get(Calendar.DAY_OF_WEEK));
     }
+
+    public static String getMessageTime(String timeStr) {
+        DateFormat fmt = new SimpleDateFormat(TIME_FORMAT);
+        Date date = null;
+        try {
+            date = fmt.parse(timeStr);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        SimpleDateFormat format = new SimpleDateFormat(TIME_FORMAT);
+        return format.format(date);
+    }
+
 
     private static String GetCH(int input) {
         String sd = "";

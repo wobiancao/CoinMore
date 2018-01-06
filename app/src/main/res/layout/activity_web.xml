@@ -33,6 +33,23 @@
                 android:textSize="16sp"
                 android:textStyle="bold"/>
         </LinearLayout>
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_weight="1"
+            android:layout_height="match_parent">
+        <TextView
+            android:layout_width="wrap_content"
+            android:id="@+id/title_browser"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:layout_alignParentRight="true"
+            android:paddingRight="10dp"
+            android:paddingLeft="10dp"
+            android:textSize="14sp"
+            android:textColor="@color/colorPrimary"
+            android:text="去浏览器看"/>
+        </RelativeLayout>
     </LinearLayout>
     <View
         android:layout_width="match_parent"

@@ -23,6 +23,7 @@
             custom:ddAnimatedIndicator="dachshund"
             custom:ddIndicatorColor="@color/colorWhite"
             custom:ddIndicatorHeight="6dp"
+            android:layout_toLeftOf="@+id/image_more"
             custom:tabMode="scrollable"
             custom:tabSelectedTextColor="@color/colorWhite"
             custom:tabTextColor="@color/colorAccent"/>

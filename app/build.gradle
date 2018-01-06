@@ -7,8 +7,8 @@ android {
         applicationId "com.morecoin.app"
         minSdkVersion 19
         targetSdkVersion 25
-        versionCode 7
-        versionName "1.0.7"
+        versionCode 8
+        versionName "1.0.8"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         manifestPlaceholders = [
                 UMENG_APPKEY : "5a4b29548f4a9d3009000025",

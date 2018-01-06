@@ -37,9 +37,8 @@ public class ProgressWebView extends WebView {
         addView(progressbar);
         getSettings().setJavaScriptEnabled(true);
         //是否可以缩放
-        getSettings().setAppCacheEnabled(false);
+        getSettings().setAppCacheEnabled(true);
         getSettings().setSupportZoom(false);
-        getSettings().setBuiltInZoomControls(true);
         setWebViewClient(new WebViewClient() {
             @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon) {

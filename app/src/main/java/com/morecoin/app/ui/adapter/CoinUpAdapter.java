@@ -17,8 +17,8 @@ import java.util.List;
  * Created by wxy on 2018/1/4.
  */
 
-public class UpCoinAdapter extends BaseQuickAdapter<CoinUpEntity, BaseViewHolder> {
-    public UpCoinAdapter(@Nullable List<CoinUpEntity> data) {
+public class CoinUpAdapter extends BaseQuickAdapter<CoinUpEntity, BaseViewHolder> {
+    public CoinUpAdapter(@Nullable List<CoinUpEntity> data) {
         super(R.layout.item_up, data);
     }
 

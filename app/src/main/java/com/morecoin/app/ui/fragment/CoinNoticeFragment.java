@@ -7,10 +7,10 @@ import android.widget.TextView;
 
 import com.morecoin.app.R;
 import com.morecoin.app.base.BaseFragment;
-import com.morecoin.app.bean.CoinUpBean;
-import com.morecoin.app.mvp.UpCoinContract;
-import com.morecoin.app.mvp.UpCoinImpl;
-import com.morecoin.app.ui.adapter.UpCoinAdapter;
+import com.morecoin.app.bean.CoinNoticeBean;
+import com.morecoin.app.mvp.NoticeCoinContract;
+import com.morecoin.app.mvp.NoticeCoinImpl;
+import com.morecoin.app.ui.adapter.CoinNoticeAdapter;
 import com.morecoin.app.utils.DateUtils;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -22,17 +22,17 @@ import butterknife.Bind;
  * Created by wxy on 2018/1/4.
  */
 
-public class UpCoinFragment extends BaseFragment<UpCoinContract.UpCoinPresenter> implements UpCoinContract.UpCoinIView, OnRefreshListener{
+public class CoinNoticeFragment extends BaseFragment<NoticeCoinContract.NoticeCoinPresenter> implements NoticeCoinContract.NoticeCoinIView, OnRefreshListener{
         @Bind(R.id.info_list)
     RecyclerView mRecycler;
     @Bind(R.id.info_smartrefresh)
     SmartRefreshLayout mRefresh;
    @Bind(R.id.info_time)
     TextView mTimeView;
-    private UpCoinAdapter mUpCoinAdapter;
+    private CoinNoticeAdapter mUpCoinAdapter;
     @Override
-    protected UpCoinContract.UpCoinPresenter initInjector() {
-        return new UpCoinImpl();
+    protected NoticeCoinContract.NoticeCoinPresenter initInjector() {
+        return new NoticeCoinImpl();
     }
 
     @Override
@@ -44,7 +44,7 @@ public class UpCoinFragment extends BaseFragment<UpCoinContract.UpCoinPresenter>
     public void initView(Bundle savedInstanceState) {
         super.initView(savedInstanceState);
         mTimeView.setText(DateUtils.getNowTimeStr() + "");
-        mUpCoinAdapter = new UpCoinAdapter(null);
+        mUpCoinAdapter = new CoinNoticeAdapter(null);
         mRefresh.setOnRefreshListener(this);
         mRecycler.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRecycler.setNestedScrollingEnabled(false);
@@ -61,11 +61,11 @@ public class UpCoinFragment extends BaseFragment<UpCoinContract.UpCoinPresenter>
     }
 
     @Override
-    public void onBindData(CoinUpBean coinUpBean) {
+    public void onBindData(CoinNoticeBean data) {
         if (mUpCoinAdapter != null) {
-            if (coinUpBean != null && coinUpBean.code == 0){
-                if (coinUpBean.data != null){
-                    mUpCoinAdapter.setNewData(coinUpBean.data.list);
+            if (data != null && data.Status.equals("success")){
+                if (data.NoticeList != null){
+                    mUpCoinAdapter.setNewData(data.NoticeList);
                 }
             }
 

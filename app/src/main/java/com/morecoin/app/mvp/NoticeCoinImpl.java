@@ -5,8 +5,8 @@ import android.support.annotation.NonNull;
 import com.morecoin.app.base.BasePresenterImpl;
 import com.morecoin.app.base.IView;
 import com.morecoin.app.base.observer.SimpleObserver;
-import com.morecoin.app.bean.CoinUpBean;
-import com.morecoin.app.model.impl.BiUpModelImpl;
+import com.morecoin.app.bean.CoinNoticeBean;
+import com.morecoin.app.model.impl.BiNoticeModelImpl;
 
 import java.util.Date;
 import java.util.Timer;
@@ -19,8 +19,8 @@ import io.reactivex.schedulers.Schedulers;
  * Created by wxy on 2018/1/4.
  */
 
-public class UpCoinImpl extends BasePresenterImpl<UpCoinContract.UpCoinIView> implements UpCoinContract.UpCoinPresenter {
-    private final long timeTask = 1000 * 1000;
+public class NoticeCoinImpl extends BasePresenterImpl<NoticeCoinContract.NoticeCoinIView> implements NoticeCoinContract.NoticeCoinPresenter {
+    private final long timeTask = 60 * 1000;
     private boolean isFirst = true;
     private Timer timer;
 
@@ -47,21 +47,20 @@ public class UpCoinImpl extends BasePresenterImpl<UpCoinContract.UpCoinIView> im
 
     @Override
     public void onRefresh() {
-        BiUpModelImpl.getInstance().getUpList()
+        BiNoticeModelImpl.getInstance().getNotice()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.newThread())
-                .subscribe(new SimpleObserver<CoinUpBean>() {
+                .subscribe(new SimpleObserver<CoinNoticeBean>() {
                     @Override
-                    public void onNext(CoinUpBean value) {
+                    public void onNext(CoinNoticeBean value) {
                         if (mView != null) {
                             mView.onRefreshOver();
                             mView.onBindData(value);
                             if (isFirst) {
                                 isFirst = false;
-//                                币上新 更新速度没必要这么勤
-//                                if (timer != null) {
-//                                    timer.schedule(task, new Date(), timeTask);
-//                                }
+                                if (timer != null) {
+                                    timer.schedule(task, new Date(), timeTask);
+                                }
                             }
                         }
                     }
