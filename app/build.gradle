@@ -110,4 +110,9 @@ dependencies {
     compile 'com.google.code.gson:gson:2.5'
 
     compile files('libs/lite-orm-1.9.1.jar')
+
+//    picasso
+    compile 'com.squareup.picasso:picasso:2.5.2'
+//    glide
+    compile 'com.github.bumptech.glide:glide:3.7.0'
 }

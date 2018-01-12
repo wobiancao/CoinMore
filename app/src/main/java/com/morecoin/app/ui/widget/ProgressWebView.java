@@ -19,12 +19,12 @@ import com.morecoin.app.R;
 public class ProgressWebView extends WebView {
 
     private ProgressBar progressbar;
+
     public ProgressWebView(Context context) {
         super(context);
         initView(context);
 
     }
-
 
 
     private void initView(Context context) {
@@ -98,6 +98,22 @@ public class ProgressWebView extends WebView {
             }
             super.onProgressChanged(view, newProgress);
         }
+
+    }
+
+    public void setProgress(final int progress) {
+        progressbar.post(new Runnable() {
+            @Override
+            public void run() {
+                if (progress == 100) {
+                    progressbar.setVisibility(GONE);
+                } else {
+                    if (progressbar.getVisibility() == GONE)
+                        progressbar.setVisibility(VISIBLE);
+                    progressbar.setProgress(progress);
+                }
+            }
+        });
 
     }
 

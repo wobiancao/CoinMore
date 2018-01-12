@@ -20,6 +20,7 @@ import com.morecoin.app.model.impl.BiCaijingModelImpl;
 import com.morecoin.app.model.impl.BiKnowModelImpl;
 import com.morecoin.app.model.impl.BiShiJieModelImpl;
 import com.morecoin.app.ui.fragment.CoinInfoFragment;
+import com.morecoin.app.ui.fragment.CoinMediaFragment;
 import com.morecoin.app.ui.fragment.CoinNoticeFragment;
 import com.morecoin.app.ui.fragment.CoinUpFragment;
 import com.morecoin.app.utils.VersionUtil;
@@ -41,7 +42,7 @@ public class MainActivity extends BaseActivity {
     ViewPager mViewPager;
     MyPagerAdapter mMyPagerAdapter;
     private ArrayList<Fragment> mFragments = new ArrayList<>();
-    private final String[] names = new String[]{"币财经", "币世界", "币知道", "币公告", "币上新"};
+    private final String[] names = new String[]{"币财经", "币世界", "币知道", "币公告", "币日报"};
 
     @Override
     protected int getLayoutViewId() {
@@ -60,7 +61,7 @@ public class MainActivity extends BaseActivity {
         mFragments.add(CoinInfoFragment.newInstance(BiShiJieModelImpl.HOST));
         mFragments.add(CoinInfoFragment.newInstance(BiKnowModelImpl.HOST));
         mFragments.add(new CoinNoticeFragment());
-        mFragments.add(new CoinUpFragment());
+        mFragments.add(new CoinMediaFragment());
         mMyPagerAdapter = new MyPagerAdapter(getSupportFragmentManager());
         mViewPager.setAdapter(mMyPagerAdapter);
         mTabLayout.setupWithViewPager(mViewPager);

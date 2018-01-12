@@ -6,11 +6,14 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
+import android.text.TextUtils;
 import android.view.View;
 
 import com.morecoin.app.R;
 import com.morecoin.app.base.BaseActivity;
-import com.morecoin.app.base.IPresenter;
+import com.morecoin.app.bean.CoinMediaDetailBean;
+import com.morecoin.app.mvp.MediaDetailContract;
+import com.morecoin.app.mvp.MediaDetailImpl;
 import com.morecoin.app.ui.widget.ProgressWebView;
 
 import butterknife.Bind;
@@ -20,8 +23,9 @@ import butterknife.OnClick;
  * Created by wxy on 2018/1/4.
  */
 
-public class WebActivity extends BaseActivity {
+public class WebActivity extends BaseActivity<MediaDetailContract.MediaDetailPresenter> implements MediaDetailContract.MediaDetailIView {
     private final static String URL_ADDRESS = "urlAddress";
+    private final static String URL_ID = "newsId";
     @Bind(R.id.web_view)
     ProgressWebView mWebView;
     private String mUrl = "";
@@ -36,6 +40,13 @@ public class WebActivity extends BaseActivity {
         context.startActivity(intent);
     }
 
+    public static void gotoWebActivity(Activity context, String newsId, boolean isId) {
+        Intent intent = new Intent(context, WebActivity.class);
+        intent.putExtra(URL_ID, newsId);
+        context.startActivity(intent);
+    }
+
+
 
     @Override
     public void initView(Bundle savedInstanceState) {
@@ -46,11 +57,21 @@ public class WebActivity extends BaseActivity {
             mUrl = getIntent().getStringExtra(URL_ADDRESS);
             mWebView.loadUrl(mUrl);
         }
+        if (getIntent() != null && getIntent().hasExtra(URL_ID)) {
+            String mId = getIntent().getStringExtra(URL_ID);
+            mWebView.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    mWebView.setProgress(50);
+                }
+            }, 200);
+            mPresenter.onGetDetail(mId);
+        }
     }
 
     @Override
-    protected IPresenter initInjector() {
-        return null;
+    protected MediaDetailContract.MediaDetailPresenter initInjector() {
+        return new MediaDetailImpl();
     }
 
 
@@ -61,24 +82,55 @@ public class WebActivity extends BaseActivity {
                 onBackPressed();
                 break;
             case R.id.title_browser:
-                new AlertDialog.Builder(WebActivity.this)
-                        .setTitle("提示")
-                        .setMessage("去浏览器看原网页")
-                        .setNegativeButton(
-                                "确定",
-                                new DialogInterface.OnClickListener() {
+                if (!TextUtils.isEmpty(mUrl)){
+                    new AlertDialog.Builder(WebActivity.this)
+                            .setTitle("提示")
+                            .setMessage("去浏览器看原网页")
+                            .setNegativeButton(
+                                    "确定",
+                                    new DialogInterface.OnClickListener() {
 
-                                    @Override
-                                    public void onClick(
-                                            DialogInterface dialog,
-                                            int which) {
-                                        Uri uri = Uri.parse(mUrl);
-                                        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-                                        startActivity(intent);
-                                    }
-                                }).show();
+                                        @Override
+                                        public void onClick(
+                                                DialogInterface dialog,
+                                                int which) {
+                                            Uri uri = Uri.parse(mUrl);
+                                            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                                            startActivity(intent);
+                                        }
+                                    }).show();
+                }
+
                 break;
         }
+    }
+
+    @Override
+    public void onRefreshOver() {
+        mWebView.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                mWebView.setProgress(100);
+            }
+        }, 30);
+    }
+
+    @Override
+    public void onBindData(CoinMediaDetailBean data) {
+        if (data != null && data.data != null){
+            String mResouse = data.data.content;
+            mUrl = data.data.source_link;
+            mWebView.loadDataWithBaseURL("example-app://example.co.uk/", getHtmlData(mResouse), null, "utf-8", null);
+        }
+    }
+
+
+    private  String getHtmlData(String bodyHTML) {
+        String head = "<head>" +
+                "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, user-scalable=no\"> " +
+                "<style>img{max-width: 100%; width:auto; height:auto;}</style>" +
+                "</head>";
+        return "<html>" + head + bodyHTML + "</body></html>";
     }
 
 }
