@@ -276,3 +276,16 @@ public static java.lang.String TABLENAME;
 -keepclasseswithmembernames class * {
     @butterknife.* <methods>;
 }
+
+# okhttp3
+-dontwarn okhttp3.**
+-keep class okhttp3.** { *; }
+-dontwarn okio.**
+-keep class okio.** { *; }
+-dontwarn rx.**
+-keep class rx.** { *; }
+-dontwarn com.squareup.okhttp.**
+# Retrofit
+-dontwarn retrofit2.**
+-dontwarn org.codehaus.mojo.**
+-keep class retrofit2.** { *; }
