@@ -65,7 +65,7 @@ App包结构:</br>
   [Retrofit](https://github.com/square/retrofit)</br>
   [PathView](https://github.com/geftimov/android-pathview)</br>
 
-鸣谢:
+鸣谢:</br>
 
   [蒲公英](https://www.pgyer.com)  </br>
   [友盟](http://www.umeng.com/)</br>
@@ -75,6 +75,11 @@ App包结构:</br>
   [币知道](http://www.biknow.com/)</br>
   [非小号](http://www.feixiaohao.com/)</br>   
   [Mytoken](https://www.mytoken.io/)</br>
+  
+如果有帮助什么的可以打赏:</br>
+比特币</br>![比特币.png](http://upload-images.jianshu.io/upload_images/1216032-1092e46b08948073.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)</br>
+以太坊</br>![以太坊.png](http://upload-images.jianshu.io/upload_images/1216032-207baf71fa3a245a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)</br>
+支付宝</br>![支付宝.png](http://upload-images.jianshu.io/upload_images/1216032-0524472190bd07b0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)</br>
 
 License
  -------
